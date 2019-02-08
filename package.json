@@ -1,8 +1,8 @@
 {
   "name": "anux-stores",
   "version": "1.0.0",
-  "main": "./dist/index.ts",
-  "repository": "https://github.com/Anupheaus/anux-common.git",
+  "main": "./dist/index.js",
+  "repository": "https://github.com/Anupheaus/anux-stores.git",
   "author": "Anupheaus <anupheaus@gmail.com>",
   "license": "Apache-2.0",
   "private": false,
