@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Store } from '../stores';
+import { Store } from '../store';
 import { AnuxContext } from '../context';
 import { IStoreSpec } from '../models';
 import { StoresCombiner } from './storesCombiner';

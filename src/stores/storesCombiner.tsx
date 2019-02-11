@@ -1,7 +1,8 @@
 import { PureComponent } from 'react';
 import { IStoreSpec } from '../models';
-import { Store } from '../stores';
+import { Store } from '../store';
 import { AnuxContext } from '../context';
+import { ConstructorOf } from 'anux-common';
 
 interface IProps {
   configuration: IStoreSpec[];
@@ -45,7 +46,12 @@ export class StoresCombiner extends PureComponent<IProps, IState> {
       if (!store && !alwaysNew) { store = parentStores.find(i => i instanceof type); }
       if (!store) {
         if (!onCreate) { onCreate = () => new type(); }
-        store = onCreate();
+        const allStores = parentStores.concat(newStores);
+        store = onCreate({
+          getLatest: StoresCombiner.getLast(allStores),
+          getFirst: StoresCombiner.getFirst(allStores),
+          getFromParent: StoresCombiner.getLast(parentStores),
+        });
       }
       newStores.push(store);
     });
@@ -55,6 +61,14 @@ export class StoresCombiner extends PureComponent<IProps, IState> {
     return {
       stores,
     };
+  }
+
+  private static getFirst<TStore extends Store>(stores: Store[]): (type: ConstructorOf<TStore>) => TStore {
+    return type => stores.firstOrDefault(store => store instanceof type) as TStore;
+  }
+
+  private static getLast<TStore extends Store>(stores: Store[]): (type: ConstructorOf<TStore>) => TStore {
+    return type => stores.lastOrDefault(store => store instanceof type) as TStore;
   }
 
   //#endregion
