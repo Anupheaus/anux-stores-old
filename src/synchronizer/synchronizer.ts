@@ -1,12 +1,13 @@
-import { Store } from '../stores';
+import { Store } from '../store';
 import { Unsubscribe, InternalError, DeepPartial } from 'anux-common';
+import { StateOf } from '../models';
 
 enum SyncSides {
   Left,
   Right,
 }
 
-type SetItems<TStore extends Store, TItem extends {}> = ((items: TItem[]) => DeepPartial<TStore['state']>) | ((items: TItem[], store: TStore) => Promise<void>);
+type SetItems<TStore extends Store, TItem extends {}> = ((items: TItem[]) => DeepPartial<StateOf<TStore>>) | ((items: TItem[], store: TStore) => Promise<void>);
 
 export interface ISynchronizerMappings<TLeftStore extends Store, TLeftItem extends {}, TRightStore extends Store, TRightItem extends {}> {
   setLeftItems: SetItems<TLeftStore, TLeftItem>;

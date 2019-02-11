@@ -1,4 +1,4 @@
-import { Store } from '../stores';
+import { Store } from '../store';
 import { Synchronizer } from './synchronizer';
 import { Upsertable, DeepPartial } from 'anux-common';
 

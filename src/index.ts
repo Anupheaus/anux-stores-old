@@ -2,5 +2,5 @@ import 'anux-common';
 
 export * from './store';
 export * from './stores';
-export * from './models';
+export * from './synchronizer';
 export * from './selector';
