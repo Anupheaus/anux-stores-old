@@ -1,8 +1,8 @@
-import { Store } from '../stores';
+import { Store } from '../store';
 import { selector } from './selector';
 import { mount } from 'enzyme';
 import { Component } from 'react';
-import { Stores } from '../components';
+import { Stores } from '../stores';
 import { bind } from 'anux-common';
 
 describe('selector', () => {

@@ -70,6 +70,10 @@ export class SelectorComponent extends Component<IProps, IState> {
     return !Reflect.areShallowEqual(nextState, this.state);
   }
 
+  public componentWillUnmount(): void {
+    this.unsubscribeFromTarget();
+  }
+
   private subscribeToTarget(): void {
     if (this._unsubscribe) { return; }
     const { target } = this.props;
