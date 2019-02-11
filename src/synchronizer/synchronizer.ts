@@ -177,7 +177,7 @@ export abstract class Synchronizer<TLeftStore extends Store = Store, TLeftItem e
   }
 
   private createRemoveItemDelegate(side: SyncSides, lastItems: any[], matchBy: (a: any, b: any) => boolean) {
-    const delegate = side === SyncSides.Left ? this._mappings.removeItemFromRight : this._mappings.removeItemFromLeft;
+    const delegate: (leftItem: {}, rightItem: {}) => boolean = side === SyncSides.Left ? this._mappings.removeItemFromRight : this._mappings.removeItemFromLeft;
     return (destItem: any) => {
       const sourceItem = lastItems.find(i => matchBy(destItem, i));
       return delegate(destItem, sourceItem);
@@ -185,7 +185,7 @@ export abstract class Synchronizer<TLeftStore extends Store = Store, TLeftItem e
   }
 
   private createUpdateItemDelegate(side: SyncSides) {
-    const delegate = side === SyncSides.Left ? this._mappings.updateRightItemFromLeft : this._mappings.updateLeftItemFromRight;
+    const delegate: (leftItem: {}, rightItem: {}) => {} = side === SyncSides.Left ? this._mappings.updateRightItemFromLeft : this._mappings.updateLeftItemFromRight;
     return (a: any, b: any) => delegate(b, a);
   }
 
