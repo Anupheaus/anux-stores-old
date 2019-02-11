@@ -12,10 +12,11 @@ type SetItems<TStore extends Store, TItem extends {}> = ((items: TItem[]) => Dee
 export interface ISynchronizerMappings<TLeftStore extends Store, TLeftItem extends {}, TRightStore extends Store, TRightItem extends {}> {
   setLeftItems: SetItems<TLeftStore, TLeftItem>;
   setRightItems: SetItems<TRightStore, TRightItem>;
-  leftStore?(): TLeftStore;
-  rightStore?(): TRightStore;
   getLeftItems(store: TLeftStore): TLeftItem[];
   getRightItems(store: TRightStore): TRightItem[];
+
+  leftStore?(): TLeftStore;
+  rightStore?(): TRightStore;
   matchBy?(leftItem: TLeftItem, rightItem: TRightItem): boolean;
   canAddItemFromLeft?(leftItem: TLeftItem): boolean;
   canAddItemFromRight?(rightItem: TRightItem): boolean;
