@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import { Store } from '../store';
 import { AnuxContext } from '../context';
 import { IStoreSpec } from '../models';
@@ -9,13 +9,7 @@ interface IProps {
   configuration: (ConstructorOf<Store> | IStoreSpec)[];
 }
 
-interface IState {
-  stores: Stores;
-  parentStores: Store[];
-  ourStores: Store[];
-}
-
-export class Stores extends Component<IProps, IState> {
+export class Stores extends PureComponent<IProps> {
 
   //#region Methods
 

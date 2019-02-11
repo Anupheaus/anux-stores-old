@@ -65,7 +65,7 @@ describe('Stores', () => {
     let countOfStoreSet = 0;
 
     expect(store).to.be.undefined;
-    mount((
+    const component = mount((
       <Stores
         configuration={[
           {
@@ -88,13 +88,14 @@ describe('Stores', () => {
     expect(store).to.be.instanceOf(TestStore);
     expect(countOfOnCreate).to.eq(1);
     expect(countOfStoreSet).to.eq(1);
+    component.unmount();
   });
 
   it('can get the latest store of a type', () => {
     let store: TestStore2;
 
     expect(store).to.be.undefined;
-    mount((
+    const component = mount((
       <Stores
         configuration={[
           TestStore,
@@ -109,6 +110,7 @@ describe('Stores', () => {
     ));
     expect(store).to.be.instanceOf(TestStore2);
     expect(store.firstStore).to.be.instanceOf(TestStore);
+    component.unmount();
   });
 
 });

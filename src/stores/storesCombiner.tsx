@@ -36,6 +36,11 @@ export class StoresCombiner extends PureComponent<IProps, IState> {
     );
   }
 
+  public componentWillUnmount(): void {
+    const { stores } = this.state;
+    stores.forEach(store => store.dispose());
+  }
+
   public static getDerivedStateFromProps(props: IProps, state: IState): IState {
     let { stores } = state;
     const { configuration, stores: parentStores } = props;
