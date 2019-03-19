@@ -30,19 +30,16 @@ describe('createStore', () => {
                 upsert() {
 
                 },
-            }))
-            .selectors({
-                activeFilters: (({ filters }) => ({ activeFilters: filters.filter(f => f.isActive) })),
-            });
+            }));
 
         const component = mount((
             <TestStore.Provider id="boo">
-                {TestStore.Select(({ }) => ({}))
-                    {({}, {}) => (
+                {TestStore
+                    .select(({ filters }) => ({ activeFilters: filters.filter(f => f.isActive) }))
+                    .render(({ activeFilters }) => (
                         <div></div>
-                )}
-                </TestStore.Consumer>
-            </TestStore.Provider >
+                    ))}
+            </TestStore.Provider>
         ))
     });
 
